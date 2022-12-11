@@ -151,6 +151,7 @@ final class AwesomePostView {
      * @return void
      */
     private function init_classes() : void {
+        new Jay\AwesomePostView\Admin();
     }
 
     /**
