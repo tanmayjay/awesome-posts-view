@@ -1,5 +1,5 @@
 import store from "..";
-import Api from "../../utils/Api";
+import Api from "../../utils/api";
 
 // initial state
 const state = {

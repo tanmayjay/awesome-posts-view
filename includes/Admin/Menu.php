@@ -38,16 +38,18 @@ class Menu {
 	}
 
 	/**
-	 * Add Dokan admin menu
+	 * Add Dokan admin menu.
 	 *
 	 * @since 1.0.0
 	 *
 	 * @return void
 	 */
 	public function add_admin_menu() {
-		global $submenu;
-
 		$capability = Helper::get_admin_menu_cap();
+		if ( ! current_user_can( $capability ) ) {
+			return;
+		}
+
 		$slug       = 'apv';
 		$page_title = __( 'Awesome Post View', 'apv' );
 
@@ -59,33 +61,6 @@ class Menu {
 			array( $this, 'render_admin_menu' ),
 			'dashicons-tide',
 			57
-		);
-
-		add_submenu_page(
-			$slug,
-			/* translators: %s) page title */
-			sprintf( __( 'Table - %s', 'apv' ), $page_title ),
-			__( 'Table', 'apv' ),
-			$capability,
-			Helper::get_submenu_url_base( 'table' )
-		);
-
-		add_submenu_page(
-			$slug,
-			/* translators: %s) page title */
-			sprintf( __( 'Graph - %s', 'apv' ), $page_title ),
-			__( 'Graph', 'apv' ),
-			$capability,
-			Helper::get_submenu_url_base( 'graph' )
-		);
-
-		add_submenu_page(
-			$slug,
-			/* translators: %s) page title */
-			sprintf( __( 'Settings - %s', 'apv' ), $page_title ),
-			__( 'Settings', 'apv' ),
-			$capability,
-			Helper::get_submenu_url_base( 'settings' )
 		);
 
 		add_action( $apv_menu, array( $this, 'enqueue_admin_scripts' ) );
