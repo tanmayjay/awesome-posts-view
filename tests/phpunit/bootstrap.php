@@ -1,12 +1,12 @@
 <?php
 
-// Require the dependency file
+// Require the dependency file.
 require dirname( dirname( dirname( __FILE__ ) ) ) . '/vendor/yoast/phpunit-polyfills/phpunitpolyfills-autoload.php';
 
 /**
  * PHPUnit bootstrap file.
  *
- * @package JblogContributors
+ * @package Jay\AwesomePostView\Tests
  */
 
 $_tests_dir = getenv( 'WP_TESTS_DIR' );

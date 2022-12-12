@@ -47,7 +47,7 @@ class TestSettings extends TestCase {
 		$data = array(
 			Settings::NUM_ROWS_INDEX   => 2,
 			Settings::HUMAN_DATE_INDEX => true,
-			Settings::EMAILS_INDEX	   => array( 'test@mail.com' ),
+			Settings::EMAILS_INDEX     => array( 'test@mail.com' ),
 		);
 
 		$updated = $this->settings->update( $data );

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Plugin Name: Awesome Post View
  * Description: A plugin to show posts beautifully.
@@ -12,6 +11,7 @@
  * Domain Path: /languages/
  * Requires at least: 5.8
  * Requires PHP: 7.2
+ * Package: Jay\AwesomePostView
  *
  * Copyright (c) 2022 Tanmay Kirtania (email: jktanmay@gmail.com). All rights reserved.
  *
@@ -37,7 +37,7 @@
  * **********************************************************************
  */
 
-defined( 'ABSPATH' ) || exit; // Exit if called directly
+defined( 'ABSPATH' ) || exit; // Exit if called directly.
 
 /**
  * Main class
@@ -46,164 +46,164 @@ defined( 'ABSPATH' ) || exit; // Exit if called directly
  */
 final class AwesomePostView {
 
-    /**
-     * Plugin version.
-     *
-     * @since 1.0.0
-     *
-     * @var string
-     */
-    private $version = '1.0.0';
+	/**
+	 * Plugin version.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @var string
+	 */
+	private $version = '1.0.0';
 
-    /**
-     * Minimum PHP version for the plugin.
-     *
-     * @since 1.0.0
-     *
-     * @var string
-     */
-    public $minimum_php = '7.2';
+	/**
+	 * Minimum PHP version for the plugin.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @var string
+	 */
+	public $minimum_php = '7.2';
 
-    /**
-     * The class instance.
-     *
-     * @since 1.0.0
-     *
-     * @var self
-     */
-    private static $instance = null;
+	/**
+	 * The class instance.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @var self
+	 */
+	private static $instance = null;
 
-    /**
-     * Instantiates the class.
-     *
-     * @since 1.0.0
-     *
-     * @return self
-     */
-    public static function init() : self {
-        if ( ! self::$instance ) {
-            self::$instance = new self();
-        }
+	/**
+	 * Instantiates the class.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return self
+	 */
+	public static function init() : self {
+		if ( ! self::$instance ) {
+			self::$instance = new self();
+		}
 
-        return self::$instance;
-    }
+		return self::$instance;
+	}
 
-    /**
-     * CLass constructor.
-     *
-     * @since 1.0.0
-     *
-     * @return void
-     */
-    private function __construct() {
-        $this->includes();
-        $this->constants();
-        $this->init_plugin();
-    }
+	/**
+	 * CLass constructor.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return void
+	 */
+	private function __construct() {
+		$this->includes();
+		$this->constants();
+		$this->init_plugin();
+	}
 
-    /**
-     * Includes necessary files.
-     *
-     * @since 1.0.0
-     *
-     * @return void
-     */
-    private function includes() : void {
-        require_once __DIR__ . '/vendor/autoload.php';
-    }
+	/**
+	 * Includes necessary files.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return void
+	 */
+	private function includes() : void {
+		require_once __DIR__ . '/vendor/autoload.php';
+	}
 
-    /**
-     * Defines all the necessary constants.
-     *
-     * @since 1.0.0
-     *
-     * @return void
-     */
-    private function constants() : void {
-        define( 'APV_VERSION', $this->version );
-        define( 'APV_FILE', __FILE__ );
-        define( 'APV_DIR', dirname( APV_FILE ) );
-        define( 'APV_TEMPLATES', APV_DIR . '/templates' );
-        define( 'APV_INC', APV_DIR . '/includes' );
-        define( 'APV_LIB', plugins_url( 'lib', APV_FILE ) );
-        define( 'APV_ASSETS', plugins_url( 'assets', APV_FILE ) );
-    }
+	/**
+	 * Defines all the necessary constants.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return void
+	 */
+	private function constants() : void {
+		define( 'APV_VERSION', $this->version );
+		define( 'APV_FILE', __FILE__ );
+		define( 'APV_DIR', dirname( APV_FILE ) );
+		define( 'APV_TEMPLATES', APV_DIR . '/templates' );
+		define( 'APV_INC', APV_DIR . '/includes' );
+		define( 'APV_LIB', plugins_url( 'lib', APV_FILE ) );
+		define( 'APV_ASSETS', plugins_url( 'assets', APV_FILE ) );
+	}
 
-    /**
-     * Initiates the functionalities of the plugin.
-     *
-     * @since 1.0.0
-     *
-     * @return void
-     */
-    private function init_plugin() : void {
-        $this->init_hooks();
-        $this->init_classes();
+	/**
+	 * Initiates the functionalities of the plugin.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return void
+	 */
+	private function init_plugin() : void {
+		$this->init_hooks();
+		$this->init_classes();
 
-        do_action( 'apv_loaded' );
-    }
+		do_action( 'apv_loaded' );
+	}
 
-    /**
-     * Instanciates the classes.
-     *
-     * @since 1.0.0
-     *
-     * @return void
-     */
-    private function init_classes() : void {
-        new Jay\AwesomePostView\Admin();
-    }
+	/**
+	 * Instanciates the classes.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return void
+	 */
+	private function init_classes() : void {
+		new Jay\AwesomePostView\Admin();
+	}
 
-    /**
-     * Initiates the hooks.
-     *
-     * @since 1.0.0
-     *
-     * @return void
-     */
-    private function init_hooks() : void {
-        register_activation_hook( APV_FILE, array( $this, 'activate' ) );
+	/**
+	 * Initiates the hooks.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return void
+	 */
+	private function init_hooks() : void {
+		register_activation_hook( APV_FILE, array( $this, 'activate' ) );
 
-        add_action( 'init', array( $this, 'setup_localization' ) );
-    }
+		add_action( 'init', array( $this, 'setup_localization' ) );
+	}
 
-    /**
-     * Executes activation requirements.
-     *
-     * @since 1.0.0
-     *
-     * @return void
-     */
-    public function activate() : void {
-        if ( ! $this->has_minimum_php_version() ) {
-            exit;
-        }
+	/**
+	 * Executes activation requirements.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return void
+	 */
+	public function activate() : void {
+		if ( ! $this->has_minimum_php_version() ) {
+			exit;
+		}
 
-        $installer = Jay\AwesomePostView\Installer();
-        $installer->run();
-    }
+		$installer = Jay\AwesomePostView\Installer();
+		$installer->run();
+	}
 
-    /**
-     * Setups the localization.
-     *
-     * @since 1.0.0
-     *
-     * @return void
-     */
-    public function setup_localization() {
-        load_plugin_textdomain( 'apv', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
-    }
+	/**
+	 * Setups the localization.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return void
+	 */
+	public function setup_localization() {
+		load_plugin_textdomain( 'apv', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+	}
 
-    /**
-     * Check if the PHP version is supported.
-     *
-     * @since 1.0.0
-     *
-     * @return bool
-     */
-    public function has_minimum_php_version() : bool {
-        return version_compare( PHP_VERSION, $this->minimum_php, '>=' );
-    }
+	/**
+	 * Check if the PHP version is supported.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return bool
+	 */
+	public function has_minimum_php_version() : bool {
+		return version_compare( PHP_VERSION, $this->minimum_php, '>=' );
+	}
 }
 
 
@@ -215,8 +215,8 @@ final class AwesomePostView {
  * @return AwesomePostView
  */
 function apv() : AwesomePostView {
-    return AwesomePostView::init();
+	return AwesomePostView::init();
 }
 
-// Kick-off the plugin
+// Kick-off the plugin.
 apv();
