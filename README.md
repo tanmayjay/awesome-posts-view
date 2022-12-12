@@ -6,14 +6,14 @@
 **Requires PHP:** 7.2
 **Stable tag:** 1.0.0
 **License:** GPLv2 or later
-**License URI:** http://www.gnu.org/licenses/gpl-3.0.html
+**License URI:** https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
 ## Features ##
 
-👉 AShow posts in an beautiful way.
+👉 Show posts in an beautiful way.
 
 ### Contribute ###
-This may have bugs and lack of many features. If you want to contribute on this project, you are more than welcome. Please fork the repository from [Github](https://github.com/tanmayjay/blog-contributors).
+This may have bugs and lack of many features. If you want to contribute on this project, you are more than welcome. Please fork the repository from [Github](https://github.com/tanmayjay/awesome-posts-view).
 
 ### Author ###
 Brought to you by [Tanmay Kirtania](https://jktanmay.com)
