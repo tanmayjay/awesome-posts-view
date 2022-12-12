@@ -1,0 +1,135 @@
+# Copyright (C) 2022 Tanmay Jay
+# This file is distributed under the GPL2.
+msgid ""
+msgstr ""
+"Project-Id-Version: Awesome Post View 1.0.0\n"
+"Report-Msgid-Bugs-To: "
+"https://github.com/tanmayjay/awesome-posts-view/issues/new\n"
+"POT-Creation-Date: 2022-12-12 20:26:02+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2022-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS.COM>\n"
+"Language: en\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Country: United States\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: "
+"__;_e;_x:1,2c;_ex:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;_nx_noop:1,2,3c;esc_"
+"attr__;esc_html__;esc_attr_e;esc_html_e;esc_attr_x:1,2c;esc_html_x:1,2c;\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-Bookmarks: \n"
+"X-Textdomain-Support: yes\n"
+
+#: includes/Admin/Ajax.php:48 includes/Admin/Ajax.php:82
+#: includes/Admin/Ajax.php:108
+msgid "Nonce verification failed!"
+msgstr ""
+
+#: includes/Admin/Ajax.php:52 includes/Admin/Ajax.php:86
+#: includes/Admin/Ajax.php:112
+msgid "You do not have permission to access the data."
+msgstr ""
+
+#: includes/Admin/Ajax.php:130 includes/Admin/Settings.php:266
+msgid "The provided settings key is not valid!"
+msgstr ""
+
+#: includes/Admin/Ajax.php:140
+msgid "Settings updated successfully."
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Awesome Post View"
+msgstr ""
+
+#: includes/Admin/Menu.php:55
+msgid "APV"
+msgstr ""
+
+#: includes/Admin/Menu.php:66 src/admin/components/navbar/Navbar.vue:21
+msgid "Table"
+msgstr ""
+
+#: includes/Admin/Menu.php:71 src/admin/components/graph/Graph.vue:3
+#: src/admin/components/navbar/Navbar.vue:22
+msgid "Graph"
+msgstr ""
+
+#: includes/Admin/Menu.php:76 src/admin/components/navbar/Navbar.vue:23
+#: src/admin/components/settings/Settings.vue:3
+msgid "Settings"
+msgstr ""
+
+#: includes/Admin/Settings.php:248
+msgid "Number of rows must be inclusively between 1 and 5"
+msgstr ""
+
+#: includes/Admin/Settings.php:260
+msgid "Invalid email found! Please make sure all the emails are valid."
+msgstr ""
+
+#: includes/Admin/Settings.php:278
+msgid "Something went wrong. Could not update the settings!"
+msgstr ""
+
+#: src/admin/components/generic/ListTable.vue:16
+#: src/admin/components/settings/Settings.vue:55
+msgid "Loading data..."
+msgstr ""
+
+#: src/admin/components/generic/ListTable.vue:28
+msgid "No data found."
+msgstr ""
+
+#: src/admin/components/graph/Graph.vue:53
+msgid "Values by Date"
+msgstr ""
+
+#: src/admin/components/settings/Settings.vue:11
+msgid "Number of Rows"
+msgstr ""
+
+#: src/admin/components/settings/Settings.vue:15
+msgid "The number of rows to be shown for table."
+msgstr ""
+
+#: src/admin/components/settings/Settings.vue:20
+msgid "Human Readable Date"
+msgstr ""
+
+#: src/admin/components/settings/Settings.vue:25
+msgid "Show the date in human readable format."
+msgstr ""
+
+#: src/admin/components/settings/Settings.vue:30
+#: src/admin/components/table/Table.vue:9
+msgid "Emails"
+msgstr ""
+
+#: src/admin/components/settings/Settings.vue:49
+msgid "Save Settings"
+msgstr ""
+
+#: src/admin/components/settings/Settings.vue:153
+msgid "Settings saved successfully."
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://github.com/tanmayjay/awesome-post-view"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "A plugin to show posts beautifully."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Tanmay Jay"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://jktanmay.com"
+msgstr ""

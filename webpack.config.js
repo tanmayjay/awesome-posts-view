@@ -2,8 +2,7 @@ const path = require( 'path' );
 const TerserJSPlugin = require( 'terser-webpack-plugin' );
 const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' );
 const CssMinimizerPlugin = require( 'css-minimizer-webpack-plugin' );
-const { VueLoaderPlugin } = require('vue-loader');
-const VueTemplateCompiler = require('vue-template-compiler');
+const { VueLoaderPlugin } = require( 'vue-loader' );
 
 const entryPoints = {
     'admin': './src/admin/main.js',
