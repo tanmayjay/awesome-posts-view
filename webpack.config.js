@@ -7,8 +7,6 @@ const VueTemplateCompiler = require('vue-template-compiler');
 
 const entryPoints = {
     'admin': './src/admin/main.js',
-    'frontend-custom': './assets/src/js/frontend.js',
-    'admin-custom': './assets/src/js/admin.js',
 };
 
 const plugins = [
