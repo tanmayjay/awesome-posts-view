@@ -38,7 +38,7 @@ class Menu {
 	}
 
 	/**
-	 * Add Dokan admin menu.
+	 * Add Dokan admin menu
 	 *
 	 * @since 1.0.0
 	 *
@@ -49,6 +49,8 @@ class Menu {
 		if ( ! current_user_can( $capability ) ) {
 			return;
 		}
+
+		global $submenu;
 
 		$slug       = 'apv';
 		$page_title = __( 'Awesome Post View', 'apv' );
@@ -61,6 +63,24 @@ class Menu {
 			array( $this, 'render_admin_menu' ),
 			'dashicons-tide',
 			57
+		);
+
+		$submenu[ $slug ] = array( // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
+			array(
+				__( 'Table', 'apv' ),
+				$capability,
+				Helper::get_submenu_url_base( 'table' ),
+			),
+			array(
+				__( 'Graph', 'apv' ),
+				$capability,
+				Helper::get_submenu_url_base( 'graph' ),
+			),
+			array(
+				__( 'Settings', 'apv' ),
+				$capability,
+				Helper::get_submenu_url_base( 'settings' ),
+			),
 		);
 
 		add_action( $apv_menu, array( $this, 'enqueue_admin_scripts' ) );
