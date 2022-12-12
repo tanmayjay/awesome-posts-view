@@ -33,7 +33,7 @@ class TestMenu extends TestCase {
 	 * @return void
 	 */
 	public function set_up() {
-		$this->menu_instance = new Menu();
+		$this->menu = new Menu();
 	}
 
 	/**
@@ -44,7 +44,7 @@ class TestMenu extends TestCase {
 	 * @return void
 	 */
 	public function test_admin_menu_added() {
-		$this->menu_instance->add_admin_menu();
+		$this->menu->add_admin_menu();
 		$this->assertNotEmpty( menu_page_url( 'apv' ) );
 	}
 }

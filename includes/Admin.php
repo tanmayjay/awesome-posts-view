@@ -38,5 +38,6 @@ class Admin {
     private function init_classes() : void {
         new Admin\Assets();
         new Admin\Menu();
+        new Admin\Ajax();
     }
 }

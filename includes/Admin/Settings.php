@@ -229,4 +229,55 @@ class Settings {
         $this->set( $data );
         return update_option( self::OPTION_KEY, $data );
     }
+
+    /**
+     * Updates a single key of settings.
+     *
+     * @since 1.0.0
+     *
+     * @param string         $key
+     * @param int|bool|array $value
+     *
+     * @return bool|\WP_Error
+     */
+    public function update_single( $key, $value ) {
+        switch ( $key ) {
+            case self::NUM_ROWS_INDEX:
+                $value = intval( $value );
+                if ( $value < 1 || $value > 5 ) {
+                    return new \WP_Error( 'invalid_number_rows', __( 'Number of rows must be inclusively between 1 and 5', 'apv' ) );
+                }
+                break;
+
+            case self::HUMAN_DATE_INDEX:
+                $value = Helper::parse_bool( $value );
+                break;
+
+            case self::EMAILS_INDEX:
+                $value = (array) $value;
+                foreach ( $value as $email ) {
+                    if ( ! is_email( $email ) ) {
+                        return new \WP_Error( 'invalid_emails', __( 'Invalid email found! Please make sure all the emails are valid.', 'apv' ) );
+                    }
+                }
+                break;
+
+            default:
+                return new \WP_Error( 'invalid_key', __( 'The provided settings key is not valid!', 'apv' ) );
+        }
+
+        $settings = $this->get();
+        if ( empty( $settings ) ) {
+            $settings = $this->get_defaults();
+        }
+
+        $settings[ $key ] = $value;
+        $updated = $this->update( $settings );
+
+        if ( ! $updated ) {
+            return new \WP_Error( 'settings_update_error', __( 'Something went wrong. Could not update the settings!', 'apv' ) );
+        }
+
+        return true;
+    }
 }

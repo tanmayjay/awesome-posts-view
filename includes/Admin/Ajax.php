@@ -4,7 +4,6 @@ namespace Jay\AwesomePostView\Admin;
 
 defined( 'ABSPATH' ) || exit; // Exit if called directly
 
-use Jay\AwesomePostView\Helper;
 use Jay\AwesomePostView\Utilities\Traits\Ajax as AjaxHelper;
 
 /**
@@ -114,67 +113,32 @@ class Ajax {
         }
 
         $settings = Settings::instance();
-        $data     = $settings->get();
-
-        if ( empty( $data ) ) {
-            $data = $settings->get_defaults();
-        }
 
         if ( array_key_exists( Settings::NUM_ROWS_INDEX, $_POST ) ) {
-            $num_rows = intval( $_POST[ Settings::NUM_ROWS_INDEX ] );
-
-            if ( $num_rows < 1 || $num_rows > 5 ) {
-                $this->send_error( array( 'message' => esc_html__( 'Number of rows must be inclusively between 1 and 5.', 'apv' ) ) );
-            }
-
-            $data[ Settings::NUM_ROWS_INDEX ] = $num_rows;
+            $updated = $settings->update_single( Settings::NUM_ROWS_INDEX, intval( $_POST[ Settings::NUM_ROWS_INDEX ] ) );
         } elseif ( array_key_exists( Settings::HUMAN_DATE_INDEX, $_POST ) ) {
-            $human_date = Helper::parse_bool( sanitize_text_field( wp_unslash( $_POST[ Settings::HUMAN_DATE_INDEX ] ) ) );
-            $data[ Settings::HUMAN_DATE_INDEX ] = $human_date;
+            $updated = $settings->update_single(
+                Settings::HUMAN_DATE_INDEX,
+                sanitize_text_field( wp_unslash( $_POST[ Settings::HUMAN_DATE_INDEX ] ) )
+            );
         } elseif ( array_key_exists( Settings::EMAILS_INDEX, $_POST ) ) {
-            $invalid_emails = [];
-
-            $emails = array_map(
-                function( $email ) use ( &$invalid_emails ) {
-                    if ( ! is_email( $email ) ) {
-                        $invalid_emails[] = $email;
-                    }
-
-                    return sanitize_email( wp_unslash( $email ) );
-                },
-                (array) $_POST[ Settings::EMAILS_INDEX ]
-            );
-
-            if ( ! empty( $invalid_emails ) ) {
-                $this->send_error(
-                    array(
-                        'message' => sprintf(
-                            esc_html__(
-                                'The emails: %s are not valid. Please provide correct emails.',
-                                'apv'
-                            ),
-                            implode( ', ', $invalid_emails )
-                        )
-                    )
-                );
-            }
-
-            $data[ Settings::EMAILS_INDEX ] = $emails;
-        } else {
-            $this->send_error( array( 'message' => esc_html__( 'No valid setting was provided!', 'apv' ) ) );
-        }
-
-        $settings_updated = $settings->update( $data );
-
-        if ( $settings_updated ) {
-            $this->send_success(
-                array(
-                    'data' => $data,
-                    'message' => esc_html__( 'Settings updated successfully.', 'apv' ),
-                )
+            $updated = $settings->update_single(
+                Settings::EMAILS_INDEX,
+                array_map( 'sanitize_email', (array) wp_unslash( $_POST[ Settings::EMAILS_INDEX ] ) )
             );
         } else {
-            $this->send_error( array( 'message' => esc_html__( 'Settings could not be updated!', 'apv' ) ) );
+            $this->send_error( array( 'message' => esc_html__( 'The provided settings key is not valid!', 'apv' ) ) );
         }
+
+        if ( is_wp_error( $updated ) ) {
+            $this->send_error( array( 'message' => $updated->get_error_message() ) );
+        }
+
+        $this->send_success(
+            array(
+                'data'    => $settings->get(),
+                'message' => esc_html__( 'Settings updated successfully.', 'apv' ),
+            )
+        );
     }
 }
