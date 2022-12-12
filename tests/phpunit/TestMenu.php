@@ -21,7 +21,7 @@ class TestMenu extends TestCase {
 	 *
 	 * @var Metabox
 	 */
-	private $menu_instance;
+	private $menu;
 
 	/**
 	 * Sets up the fixture, for example, open a network connection.

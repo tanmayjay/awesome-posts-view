@@ -238,7 +238,7 @@ class Settings {
      * @param string         $key
      * @param int|bool|array $value
      *
-     * @return bool|\WP_Error
+     * @return true|\WP_Error
      */
     public function update_single( $key, $value ) {
         switch ( $key ) {
