@@ -111,6 +111,11 @@ class Menu {
 		ob_start();
 		?>
 			<div class="wrap">
+				<noscript>
+					<strong>
+						<?php esc_html_e( "We're sorry but this page cannot be rendered without JavaScript enabled. Please enable it to continue.", 'apv' ); ?>
+					</strong>
+				</noscript>
 				<div id="apv-admin-app">
 					<!-- Admin views will be injected here -->
 				</div>
