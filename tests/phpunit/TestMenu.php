@@ -2,6 +2,7 @@
 
 namespace Jay\AwesomePostView\Tests;
 
+use Jay\AwesomePostView\Helper;
 use Jay\AwesomePostView\Admin\Menu;
 use Yoast\PHPUnitPolyfills\TestCases\TestCase;
 
@@ -44,7 +45,23 @@ class TestMenu extends TestCase {
 	 * @return void
 	 */
 	public function test_admin_menu_added() {
+		add_filter( 'user_has_cap', array( $this, 'add_cap' ) );
 		$this->menu->add_admin_menu();
+		remove_filter( 'user_has_cap', array( $this, 'add_cap' ) );
 		$this->assertNotEmpty( menu_page_url( 'apv' ) );
+	}
+
+	/**
+	 * Adds admin menu capability to the current user.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array $caps
+	 *
+	 * @return array
+	 */
+	public function add_cap( $caps ) {
+		$caps[ Helper::get_admin_menu_cap() ] = true;
+		return $caps;
 	}
 }
