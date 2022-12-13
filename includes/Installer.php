@@ -22,6 +22,7 @@ class Installer {
 	 */
 	public function run() : void {
 		$this->add_version_info();
+		$this->setup_default_settings();
 	}
 
 	/**
@@ -45,7 +46,7 @@ class Installer {
 	public function setup_default_settings() : void {
 		$settings = Admin\Settings::instance();
 
-		if ( false === $settings->get() ) {
+		if ( empty( $settings->get() ) ) {
 			$settings->update( $settings->get_defaults() );
 		}
 	}

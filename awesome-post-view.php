@@ -179,7 +179,7 @@ final class AwesomePostView {
 			exit;
 		}
 
-		$installer = Jay\AwesomePostView\Installer();
+		$installer = new Jay\AwesomePostView\Installer();
 		$installer->run();
 	}
 

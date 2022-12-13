@@ -274,7 +274,7 @@ class Settings {
 		}
 
 		$settings[ $key ] = $value;
-		$updated          = $this->update( $settings );
+		$updated = $this->update( $settings );
 
 		if ( ! $updated ) {
 			return new \WP_Error( 'settings_update_error', __( 'Something went wrong. Could not update the settings!', 'apv' ) );

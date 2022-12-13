@@ -160,6 +160,8 @@ export default {
                                             error: false,
                                             message: '',
                                         };
+                                        this.settings.emails.splice(index, 1);
+                                        this.settingsChanged.emails = ! this.isEqual(this.settings.emails, this.settingsData.emails);
                                     } else if (! this.isEmail(email)) {
                                         this.validation.emails[index] = {
                                             error: true,
@@ -206,29 +208,27 @@ export default {
         },
 
         async submit() {
-            let newData = {};
+            if (this.validate()) {
+                let newData = {};
 
-            for (let key of Object.keys(this.settingsChanged)) {
-                if (this.settingsChanged[key]) {
-                    const data = {};
-                    data[key] = this.settings[key];
+                for (let key of Object.keys(this.settingsChanged)) {
+                    if (this.settingsChanged[key]) {
+                        const data = {};
+                        data[key] = this.settings[key];
 
-                    if (! this.validate()) {
-                        break;
+                        await this.$store.dispatch('settings/updateData', {...data}).then(success => {
+                            this.settingsChanged[key] = false;
+                            newData[key] = data[key];
+                        }, error => {
+                            this.$toast.error(error.data.message);
+                        });
                     }
-
-                    await this.$store.dispatch('settings/updateData', {...data}).then(success => {
-                        this.settingsChanged[key] = false;
-                        newData[key] = data[key];
-                    }, error => {
-                        this.$toast.error(error);
-                    });
                 }
-            }
 
-            if (! this.isEmpty(newData)) {
-                this.$store.commit('settings/setData', {...this.settingsData, ...newData});
-                this.$toast.success(this.__('Settings saved successfully.', 'apv'));
+                if (! this.isEmpty(newData)) {
+                    this.$store.commit('settings/setData', {...this.settingsData, ...newData});
+                    this.$toast.success(this.__('Settings saved successfully.', 'apv'));
+                }
             }
         },
     },
@@ -239,8 +239,8 @@ export default {
         },
 
         emails(newVal) {
-            this.settingsChanged.emails = ! this.isEqual(newVal, this.settingsData.emails);
             this.validate('emails');
+            this.settingsChanged.emails = ! this.isEqual(newVal, this.settingsData.emails);
 
             if (newVal.length === 0) {
                 this.addEmailField();
