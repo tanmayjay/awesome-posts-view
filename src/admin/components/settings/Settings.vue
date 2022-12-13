@@ -8,21 +8,22 @@
                         <template v-if="! loading">
                             <tr v-if="('numrows' in settings)">
                                 <th scope="row">
-                                    <label for="numrows">{{__( 'Number of Rows', 'apv' )}}</label>
+                                    <label for="numrows">{{__('Number of Rows', 'apv')}}</label>
                                 </th>
                                 <td>
                                     <input id="numrows" type="number" max="5" min="1" v-model="settings.numrows" />
+                                    <p v-if="('error' in validation.numrows && validation.numrows.error && validation.numrows.message)" class="description error">{{validation.numrows.message}}</p>
                                     <p class="description">{{__( 'The number of rows to be shown for table.', 'apv' )}}</p>
                                 </td>
                             </tr>
                             <tr v-if="('humandate' in settings)">
                                 <th scope="row">
-                                    <label>{{__( 'Human Readable Date', 'apv' )}}</label>
+                                    <label>{{__('Human Readable Date', 'apv')}}</label>
                                 </th>
                                 <td>
                                     <input id="humandate" type="checkbox" class="switch is-rounded is-info" :checked="settings.humandate" @change="toggleHumanDate" />
                                     <label for="humandate"></label>
-                                    <p class="description">{{__( 'Show the date in human readable format.', 'apv' )}}</p>
+                                    <p class="description">{{__('Show the date in human readable format.', 'apv')}}</p>
                                 </td>
                             </tr>
                             <tr v-if="('emails' in settings)">
@@ -30,16 +31,19 @@
                                     <label for="emails">{{__( 'Emails', 'apv' )}}</label>
                                 </th>
                                 <td>
-                                    <div v-for="(email, index) in settings.emails" :key="index" class="input-group">
-                                        <input type="text" v-model="settings.emails[index]" />
-                                        <span v-if="allowRemovingEmail"
-                                            @click="removeEmailField(index)"
-                                            class="dashicons dashicons-dismiss repeater-control remove"
-                                        ></span>
-                                        <span v-if="allowNewEmail && index === totalEmails -1"
-                                            @click="addEmailField"
-                                            class="dashicons dashicons-plus-alt repeater-control add"
-                                        ></span>
+                                    <div v-for="(email, index) in settings.emails" :key="index">
+                                        <div class="input-group">
+                                            <input type="email" v-model="settings.emails[index]" />
+                                            <span v-if="allowRemovingEmail"
+                                                @click="removeEmailField(index)"
+                                                class="dashicons dashicons-dismiss repeater-control remove"
+                                            ></span>
+                                            <span v-if="allowNewEmail && index === totalEmails -1"
+                                                @click="addEmailField"
+                                                class="dashicons dashicons-plus-alt repeater-control add"
+                                            ></span>
+                                        </div>
+                                        <p v-if="(index in validation.emails && validation.emails[index].error && validation.emails[index].message)" class="description error">{{validation.emails[index].message}}</p>
                                     </div>
                                 </td>
                             </tr>
@@ -71,6 +75,10 @@ export default {
         return {
             settings: {},
             settingsChanged: {},
+            validation: {
+                numrows: {},
+                emails: {},
+            },
         }
     },
 
@@ -132,6 +140,71 @@ export default {
             }
         },
 
+        validate(settingsKey) {
+            let validated = true;
+
+            if (this.isEmpty(settingsKey)) {
+                settingsKey = Object.keys(this.settingsChanged);
+            } else if (typeof settingsKey !== 'array') {
+                settingsKey = [settingsKey];
+            }
+
+            settingsKey.map(key => {
+                if (this.settingsChanged[key]) {
+                    switch(key) {
+                        case 'emails':
+                            this.settings.emails.map((email, index) => {
+                                if (! this.isEqual(email, this.settingsData.emails[index])) {
+                                    if (this.isEmpty(email)) {
+                                        this.validation.emails[index] = {
+                                            error: false,
+                                            message: '',
+                                        };
+                                    } else if (! this.isEmail(email)) {
+                                        this.validation.emails[index] = {
+                                            error: true,
+                                            message: this.__('Not a valid email address', 'apv'),
+                                        };
+
+                                        validated = false;
+                                    } else {
+                                        this.validation.emails[index] = {
+                                            error: false,
+                                            message: '',
+                                        };
+                                    }
+                                } else {
+                                    this.validation.emails[index] = {
+                                        error: false,
+                                        message: '',
+                                    };
+                                }
+                            });
+                            break;
+
+                        case 'numrows':
+                            if (this.isEmpty(this.settings.numrows) || parseInt(this.settings.numrows) < 1 || parseInt(this.settings.numrows) > 5) {
+                                this.validation.numrows = {
+                                    error: true,
+                                    message: this.__('Number of rows must be inclusively between 1 and 5', 'apv'),
+                                }
+                                validated = false;
+                            } else {
+                                this.validation.numrows = {
+                                    error: false,
+                                    message: '',
+                                }
+                            }
+                            break;
+                    }
+                } else {
+                    this.validation[key] = {};
+                }
+            });
+
+            return validated;
+        },
+
         async submit() {
             let newData = {};
 
@@ -139,6 +212,11 @@ export default {
                 if (this.settingsChanged[key]) {
                     const data = {};
                     data[key] = this.settings[key];
+
+                    if (! this.validate()) {
+                        break;
+                    }
+
                     await this.$store.dispatch('settings/updateData', {...data}).then(success => {
                         this.settingsChanged[key] = false;
                         newData[key] = data[key];
@@ -162,6 +240,7 @@ export default {
 
         emails(newVal) {
             this.settingsChanged.emails = ! this.isEqual(newVal, this.settingsData.emails);
+            this.validate('emails');
 
             if (newVal.length === 0) {
                 this.addEmailField();
@@ -170,6 +249,7 @@ export default {
 
         numrows(newVal) {
             this.settingsChanged.numrows = parseInt(newVal) !== parseInt(this.settingsData.numrows);
+            this.validate('numrows');
         },
 
         humandate(newVal) {
@@ -186,12 +266,24 @@ export default {
     display: block;
 }
 
+.apv-settings p.description.error {
+    color: rgb(222, 70, 70);
+    font-style: italic;
+    font-weight: 250;
+    font-size: 12px;
+    padding: 0 0 8px 3px;
+}
+
 .apv-settings .form-table {
     padding: 20px;
 }
 
 .apv-settings .form-table .input-group {
     display: flex;
+}
+
+.apv-settings .form-table .input-group input {
+    margin-top: 5px;
 }
 
 .apv-settings .form-table th {
@@ -212,6 +304,18 @@ export default {
     border-width: 1.5px;
 }
 
+.apv-settings .form-table input:focus, .apv-settings .form-table input:active {
+    box-shadow: none;
+}
+
+.apv-settings .form-table input.error {
+    border-color: rgb(222, 87, 87);
+}
+
+.apv-settings .form-table input.validated {
+    border-color: rgb(76, 229, 112);
+}
+
 .apv-settings .form-table tr {
     border-bottom: 1px solid #e4e4e4;
     padding: 30px 0;
@@ -225,7 +329,7 @@ export default {
 
 .apv-settings .dashicons.repeater-control {
     font-size: 30px;
-    margin: 5px 3px 0 3px;
+    margin: 7px 3px 0 3px;
     cursor: pointer;
     color: #d3d3d394;
 }

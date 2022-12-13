@@ -255,8 +255,10 @@ class Settings {
 
 			case self::EMAILS_INDEX:
 				$value = (array) $value;
-				foreach ( $value as $email ) {
-					if ( ! is_email( $email ) ) {
+				foreach ( $value as $index => $email ) {
+					if ( empty( $email ) ) {
+						unset( $value[ $index ] );
+					} elseif ( ! is_email( $email ) ) {
 						return new \WP_Error( 'invalid_emails', __( 'Invalid email found! Please make sure all the emails are valid.', 'apv' ) );
 					}
 				}

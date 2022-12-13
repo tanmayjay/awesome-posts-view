@@ -31,6 +31,15 @@ export default {
         deepCopy: data => JSON.parse(JSON.stringify(data)),
 
         /**
+         * Validates an email.
+         *
+         * @param {String} email
+         *
+         * @returns {Boolean}
+         */
+        isEmail: email => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,})+$/.test(email),
+
+        /**
          * Checks if two values are equal.
          *
          * @param {Any} value1
