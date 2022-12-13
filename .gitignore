@@ -1,4 +1,5 @@
 /vendor/
+/build/
 /node_modules/
 phpcs.xml
 phpunit.xml

@@ -12,5 +12,7 @@ return [
 	__( 'Show the date in human readable format.', 'apv' ),
 	__( 'Emails', 'apv' ),
 	__( 'Save Settings', 'apv' ),
+	__( 'Not a valid email address', 'apv' ),
+	__( 'Number of rows must be inclusively between 1 and 5', 'apv' ),
 	__( 'Settings saved successfully.', 'apv' ),
 ];
