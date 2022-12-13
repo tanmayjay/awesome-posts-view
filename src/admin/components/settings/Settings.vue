@@ -259,86 +259,97 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="less">
 @import 'bulma-switch/dist/css/bulma-switch.min.css';
 
-.apv-settings p.description {
-    display: block;
-}
+.apv-settings {
+    p {
+        &.description {
+            display: block;
 
-.apv-settings p.description.error {
-    color: rgb(222, 70, 70);
-    font-style: italic;
-    font-weight: 250;
-    font-size: 12px;
-    padding: 0 0 8px 3px;
-}
+            &.error {
+                color: rgb(222, 70, 70);
+                font-style: italic;
+                font-weight: 250;
+                font-size: 12px;
+                padding: 0 0 8px 3px;
+            }
+        }
+    }
 
-.apv-settings .form-table {
-    padding: 20px;
-}
+    .form-table {
+        padding: 20px;
 
-.apv-settings .form-table .input-group {
-    display: flex;
-}
+        .input-group {
+            display: flex;
 
-.apv-settings .form-table .input-group input {
-    margin-top: 5px;
-}
+            input {
+                margin-top: 5px;
+            }
+        }
 
-.apv-settings .form-table th {
-    padding-left: 20px;
-    width: 250px;
-}
+        th {
+            padding-left: 20px;
+            width: 250px;
+        }
 
-.apv-settings .form-table td {
-    padding-left: 20px;
-}
+        td {
+            padding-left: 20px;
+        }
 
-.apv-settings .form-table input {
-    width: 80%;
-    min-width: 80%;
-    line-height: 2.5;
-    outline: none;
-    border-color: #d3d3d394;
-    border-width: 1.5px;
-}
+        tr {
+            border-bottom: 1px solid #e4e4e4;
+            padding: 30px 0;
+            font-size: 14px;
+            line-height: 1.3;
 
-.apv-settings .form-table input:focus, .apv-settings .form-table input:active {
-    box-shadow: none;
-}
+            &:first-child {
+                border-top: 1px solid #e4e4e4;
+            }
+        }
 
-.apv-settings .form-table input.error {
-    border-color: rgb(222, 87, 87);
-}
+        input {
+            width: 80%;
+            min-width: 80%;
+            line-height: 2.5;
+            outline: none;
+            border-color: #d3d3d394;
+            border-width: 1.5px;
 
-.apv-settings .form-table input.validated {
-    border-color: rgb(76, 229, 112);
-}
+            &:focus,
+            &:active {
+                box-shadow: none;
+            }
 
-.apv-settings .form-table tr {
-    border-bottom: 1px solid #e4e4e4;
-    padding: 30px 0;
-    font-size: 14px;
-    line-height: 1.3;
-}
+            &.error {
+                border-color: rgb(222, 87, 87);
+            }
 
-.apv-settings .form-table tr:first-child {
-    border-top: 1px solid #e4e4e4;
-}
+            &.validated {
+                border-color: rgb(76, 229, 112);
+            }
+        }
 
-.apv-settings .dashicons.repeater-control {
-    font-size: 30px;
-    margin: 7px 3px 0 3px;
-    cursor: pointer;
-    color: #d3d3d394;
-}
+        .dashicons {
+            &.repeater-control {
+                font-size: 30px;
+                margin: 7px 3px 0 3px;
+                cursor: pointer;
+                color: #d3d3d394;
 
-.apv-settings .dashicons.repeater-control.remove:hover {
-    color: rgb(203, 90, 90);
-}
+                &.remove {
+                    &:hover {
+                        color: rgb(203, 90, 90);
+                    }
+                }
 
-.apv-settings .dashicons.repeater-control.add:hover {
-    color: rgb(28, 170, 226);
+                &.add {
+                    &:hover {
+                        color: rgb(28, 170, 226);
+                    }
+                }
+            }
+        }
+    }
 }
 </style>

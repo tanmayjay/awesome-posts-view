@@ -81,7 +81,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="less">
 .apv-heading {
     margin-bottom: 15px;
 }
@@ -91,18 +91,19 @@ export default {
     width: 100%;
     margin-bottom: 1rem;
     border-radius: 3px;
-}
 
-.apv-list-table th,
-.apv-list-table td {
-    color: #525252;
-    padding: 18px 10px;
-    vertical-align: middle;
-    border-top: 2px solid #f6f6f6;
-}
+    th, td {
+        color: #525252;
+        padding: 18px 10px;
+        vertical-align: middle;
+        border-top: 2px solid #f6f6f6;
+    }
 
-.apv-list-table thead tr {
-    box-shadow: 0 5px 12px 0 rgb(0 100 235 / 6%);
-    transform: translateY(-0.1px);
+    thead {
+        tr {
+            box-shadow: 0 5px 12px 0 rgb(0 100 235 / 6%);
+            transform: translateY(-0.1px);
+        }
+    }
 }
 </style>

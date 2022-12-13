@@ -36,7 +36,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="less">
 @import 'vue-loading-overlay/dist/vue-loading.css';
 
 .apv-backend-app {
@@ -60,14 +60,16 @@ export default {
     background-color: rgb(28, 170, 226);
     color: #fff;
     margin: 5px 0 15px 0;
+
+    &:hover {
+        background-color: rgb(44, 186, 243);
+    }
 }
 
-.apv-btn-submit:hover {
-    background-color: rgb(44, 186, 243);
-}
-
-.apv-wrap .apv-inside {
-    background-color: #fff;
-    margin-top: 10px;
+.apv-wrap {
+    .apv-inside {
+        background-color: #fff;
+        margin-top: 10px;
+    }
 }
 </style>

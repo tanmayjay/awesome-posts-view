@@ -94,8 +94,10 @@ export default {
 }
 </script>
 
-<style scoped>
-.apv-graph .apv-inside {
-    padding: 50px 20px;
+<style lang="less" scoped>
+.apv-graph {
+    .apv-inside {
+        padding: 50px 20px;
+    }
 }
 </style>

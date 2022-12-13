@@ -44,7 +44,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="less">
 .apv-admin-navbar {
     background: #fff;
     box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
@@ -53,23 +53,23 @@ export default {
     height: 54px;
     margin: -9px -20px 20px -20px;
     padding: 0 20px;
-}
 
-.apv-admin-navbar a {
-    box-shadow: none;
-    color: #6e6e6e;
-    display: inline-block;
-    padding: 18px 20px 16px 20px;
-    text-decoration: none;
-}
+    a {
+        box-shadow: none;
+        color: #6e6e6e;
+        display: inline-block;
+        padding: 18px 20px 16px 20px;
+        text-decoration: none;
 
-.apv-admin-navbar a:focus,
-.apv-admin-navbar a:active {
-    box-shadow: none;
-    outline: none;
-}
+        &:focus,
+        &:active {
+            box-shadow: none;
+            outline: none;
+        }
 
-.apv-admin-navbar a.router-link-active {
-    border-bottom: 3px solid rgb(44, 186, 243);
+        &.router-link-active {
+            border-bottom: 3px solid rgb(44, 186, 243);
+        }
+    }
 }
 </style>

@@ -109,25 +109,27 @@ export default {
 }
 </script>
 
-<style scoped>
-.apv-settings-emails ul {
-    width: max-content;
-    background: #fff;
-}
+<style lang="less" scoped>
+.apv-settings-emails {
+    ul {
+        width: max-content;
+        background: #fff;
 
-.apv-settings-emails ul li {
-    background: #fff;
-    padding: 8px 18px;
-    border-top: 1px solid;
-    border-bottom: 1px solid;
-    border-color: #e2e2e2;
-    font-size: 14px;
-    margin: 0;
-}
+        li {
+            background: #fff;
+            padding: 8px 18px;
+            border-top: 1px solid;
+            border-bottom: 1px solid;
+            border-color: #e2e2e2;
+            font-size: 14px;
+            margin: 0;
 
-.apv-settings-emails ul li a {
-    text-decoration: none;
-    color: #595959;
-    font-weight: 400;
+            a {
+                text-decoration: none;
+                color: #595959;
+                font-weight: 400;
+            }
+        }
+    }
 }
 </style>
