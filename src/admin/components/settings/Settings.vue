@@ -328,7 +328,7 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 @import 'bulma-switch/dist/css/bulma-switch.min.css';
 
 .apv-settings {
@@ -402,7 +402,7 @@ export default {
         .dashicons {
             &.repeater-control {
                 font-size: 30px;
-                margin: 7px 3px 0 3px;
+                margin: 10px 3px 0 3px;
                 cursor: pointer;
                 color: #d3d3d394;
 
