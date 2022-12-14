@@ -8,7 +8,7 @@
             <form>
                 <table class="form-table">
                     <tbody>
-                        <template v-if="! loading">
+                        <template v-if="! isEmpty(settings)">
                             <tr v-if="('numrows' in settings)">
                                 <th scope="row">
                                     <label for="numrows">
