@@ -5,7 +5,6 @@ const pluginFiles = [
     'assets/**/*',
     'src/**/*',
     'includes/**/*',
-    'templates/**/*',
     'tests/**/*',
     'awesome-post-view.php',
 ];

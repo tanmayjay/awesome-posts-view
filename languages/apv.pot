@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: Awesome Post View 1.0.0\n"
 "Report-Msgid-Bugs-To: "
 "https://github.com/tanmayjay/awesome-posts-view/issues/new\n"
-"POT-Creation-Date: 2022-12-13 15:24:42+00:00\n"
+"POT-Creation-Date: 2022-12-14 22:45:06+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -50,22 +50,28 @@ msgstr ""
 msgid "APV"
 msgstr ""
 
-#: includes/Admin/Menu.php:70 src/admin/components/navbar/Navbar.vue:21
+#: includes/Admin/Menu.php:70 src/admin/components/navbar/Navbar.vue:29
 msgid "Table"
 msgstr ""
 
-#: includes/Admin/Menu.php:75 src/admin/components/graph/Graph.vue:3
-#: src/admin/components/navbar/Navbar.vue:22
+#: includes/Admin/Menu.php:75 src/admin/components/graph/Graph.vue:4
+#: src/admin/components/navbar/Navbar.vue:30
 msgid "Graph"
 msgstr ""
 
-#: includes/Admin/Menu.php:80 src/admin/components/navbar/Navbar.vue:23
-#: src/admin/components/settings/Settings.vue:3
+#: includes/Admin/Menu.php:80 src/admin/components/navbar/Navbar.vue:31
+#: src/admin/components/settings/Settings.vue:4
 msgid "Settings"
 msgstr ""
 
+#: includes/Admin/Menu.php:116
+msgid ""
+"We're sorry but this page cannot be rendered without JavaScript enabled. "
+"Please enable it to continue."
+msgstr ""
+
 #: includes/Admin/Settings.php:248
-#: src/admin/components/settings/Settings.vue:189
+#: src/admin/components/settings/Settings.vue:260
 msgid "Number of rows must be inclusively between 1 and 5"
 msgstr ""
 
@@ -77,50 +83,54 @@ msgstr ""
 msgid "Something went wrong. Could not update the settings!"
 msgstr ""
 
-#: src/admin/components/generic/ListTable.vue:16
-#: src/admin/components/settings/Settings.vue:59
+#: src/admin/components/generic/ListTable.vue:24
+#: src/admin/components/settings/Settings.vue:105
 msgid "Loading data..."
 msgstr ""
 
-#: src/admin/components/generic/ListTable.vue:28
+#: src/admin/components/generic/ListTable.vue:46
 msgid "No data found."
 msgstr ""
 
-#: src/admin/components/graph/Graph.vue:53
+#: src/admin/components/graph/Graph.vue:59
 msgid "Values by Date"
 msgstr ""
 
-#: src/admin/components/settings/Settings.vue:11
+#: src/admin/components/settings/Settings.vue:15
 msgid "Number of Rows"
 msgstr ""
 
-#: src/admin/components/settings/Settings.vue:16
+#: src/admin/components/settings/Settings.vue:33
 msgid "The number of rows to be shown for table."
 msgstr ""
 
-#: src/admin/components/settings/Settings.vue:21
+#: src/admin/components/settings/Settings.vue:39
 msgid "Human Readable Date"
 msgstr ""
 
-#: src/admin/components/settings/Settings.vue:26
+#: src/admin/components/settings/Settings.vue:51
 msgid "Show the date in human readable format."
 msgstr ""
 
-#: src/admin/components/settings/Settings.vue:31
-#: src/admin/components/table/Table.vue:9
+#: src/admin/components/settings/Settings.vue:58
+#: src/admin/components/table/Table.vue:13
 msgid "Emails"
 msgstr ""
 
-#: src/admin/components/settings/Settings.vue:53
+#: src/admin/components/settings/Settings.vue:98
 msgid "Save Settings"
 msgstr ""
 
-#: src/admin/components/settings/Settings.vue:166
+#: src/admin/components/settings/Settings.vue:237
 msgid "Not a valid email address"
 msgstr ""
 
-#: src/admin/components/settings/Settings.vue:231
+#: src/admin/components/settings/Settings.vue:320
 msgid "Settings saved successfully."
+msgstr ""
+
+#: src/admin/components/settings/Settings.vue:323
+msgid "No changes have been made yet."
 msgstr ""
 
 #. Plugin URI of the plugin/theme

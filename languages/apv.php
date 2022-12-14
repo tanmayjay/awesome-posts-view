@@ -15,4 +15,5 @@ return [
 	__( 'Not a valid email address', 'apv' ),
 	__( 'Number of rows must be inclusively between 1 and 5', 'apv' ),
 	__( 'Settings saved successfully.', 'apv' ),
+	__( 'No changes have been made yet.', 'apv' ),
 ];

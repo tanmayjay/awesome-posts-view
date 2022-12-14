@@ -8,7 +8,6 @@ const pluginFiles = [
     'assets/',
     'includes/',
     'languages/',
-    'templates/',
     'readme.txt',
     'awesome-post-view.php',
     'composer.json',
