@@ -24,6 +24,7 @@ Brought to you by [Tanmay Kirtania](https://jktanmay.com)
 -   CD into folder `cd awesome-post-view` and run `composer install` and then `composer dump-autoload -o`
 -   Lastly run `npm install` and then `npm run build` and then `npm run dev:build`
 -   Activate the plugin
+-   For production version, run `npm run release`, then find the zip file inside `/build` directory
 
 
 ## Changelog ##
