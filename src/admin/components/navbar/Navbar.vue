@@ -1,17 +1,25 @@
 <template>
     <div class="apv-admin-navbar">
-        <RouterLink v-for="(item, key) in navLinks" :key="key" :to="key" :class="navItemClass(key)">
-            {{item}}
+        <RouterLink
+            v-for="(item, key) in navLinks"
+            :key="key"
+            :to="key"
+            :class="navItemClass(key)"
+        >
+            {{ item }}
         </RouterLink>
     </div>
 </template>
 
 <script>
 export default {
-    name: 'Navbar',
+    name: 'NavbarComponent',
 
     props: {
-        navItems: Object,
+        navItems: {
+            type: Object,
+            default: () => {},
+        },
     },
 
     computed: {
@@ -58,8 +66,10 @@ export default {
         box-shadow: none;
         color: #6e6e6e;
         display: inline-block;
-        padding: 18px 20px 16px 20px;
+        padding: 18px 18px 16px 18px;
+        margin: 0 2px;
         text-decoration: none;
+        cursor: pointer;
 
         &:focus,
         &:active {
@@ -67,6 +77,7 @@ export default {
             outline: none;
         }
 
+        &:hover,
         &.router-link-active {
             border-bottom: 3px solid rgb(44, 186, 243);
         }

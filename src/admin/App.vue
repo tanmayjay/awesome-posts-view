@@ -7,7 +7,7 @@
             loader="spinner"
             color="#1a9ed4"
             :opacity="0.8"
-            :isFullPage="false"
+            :is-full-page="false"
             :width="45"
         />
     </div>
@@ -26,13 +26,13 @@ export default {
         Loading,
     },
 
-    created() {
-        this.$store.dispatch('settings/setData', {});
-    },
-
     computed: mapGetters({
         loader: 'spinner/getStatus',
     }),
+
+    created() {
+        this.$store.dispatch('settings/setData', {});
+    },
 };
 </script>
 

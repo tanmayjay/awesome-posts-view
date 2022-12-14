@@ -11,6 +11,7 @@ const getters = {
 };
 
 const actions = {
+    // eslint-disable-next-line no-unused-vars
     parseData: async({ commit }) => {
         store.dispatch('spinner/setSpinner', true);
 

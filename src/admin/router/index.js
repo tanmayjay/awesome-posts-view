@@ -18,18 +18,18 @@ const routes = [
         children : [
             {
                 path     : 'table',
-                name     : 'Table',
+                name     : 'TableComponent',
                 component: Table,
                 alias    : '/',
             },
             {
                 path     : 'settings',
-                name     : 'Settings',
+                name     : 'SettingsComponent',
                 component: Settings,
             },
             {
                 path     : 'graph',
-                name     : 'Graph',
+                name     : 'GraphComponent',
                 component: Graph,
             }
         ]

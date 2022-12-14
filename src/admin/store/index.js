@@ -6,6 +6,7 @@ import spinner from './modules/spinner';
 
 Vue.use(Vuex);
 
+// eslint-disable-next-line no-undef
 const debug = process.env.NODE_ENV !== 'production';
 
 const store = new Vuex.Store({

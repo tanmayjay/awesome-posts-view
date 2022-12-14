@@ -1,8 +1,14 @@
 <template>
     <div class="apv-graph apv-wrap">
-        <h1 class="wp-heading-inline apv-heading">{{__('Graph', 'apv')}}</h1>
+        <h1 class="wp-heading-inline apv-heading">
+            {{ __('Graph', 'apv') }}
+        </h1>
+
         <div class="apv-inside">
-            <LineChart :chart-data="chartData" :chart-options="options" />
+            <LineChart
+                :chart-data="chartData"
+                :chart-options="options"
+            />
         </div>
     </div>
 </template>
@@ -33,7 +39,7 @@ ChartJS.register(
 );
 
 export default {
-    name: "Graph",
+    name: "GraphComponent",
 
     components: {
         LineChart,
@@ -56,14 +62,6 @@ export default {
                     },
                 ],
             },
-        }
-    },
-
-    async mounted() {
-        await this.$store.dispatch('base/setData', this.baseData);
-
-        if ( ! this.isEmpty( this.baseData ) ) {
-            this.data = JSON.parse(JSON.stringify(this.baseData));
         }
     },
 
@@ -90,7 +88,15 @@ export default {
                 this.chartData.datasets[0].data.push(this.graph[key].value);
             });
         }
-    }
+    },
+
+    async mounted() {
+        await this.$store.dispatch('base/setData', this.baseData);
+
+        if ( ! this.isEmpty( this.baseData ) ) {
+            this.data = JSON.parse(JSON.stringify(this.baseData));
+        }
+    },
 }
 </script>
 

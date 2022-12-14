@@ -1,6 +1,9 @@
 <template>
     <div class="apv-settings apv-wrap">
-        <h1 class="wp-heading-inline apv-heading">{{__('Settings', 'apv')}}</h1>
+        <h1 class="wp-heading-inline apv-heading">
+            {{ __('Settings', 'apv') }}
+        </h1>
+
         <div class="apv-inside">
             <form>
                 <table class="form-table">
@@ -8,55 +11,99 @@
                         <template v-if="! loading">
                             <tr v-if="('numrows' in settings)">
                                 <th scope="row">
-                                    <label for="numrows">{{__('Number of Rows', 'apv')}}</label>
+                                    <label for="numrows">
+                                        {{ __('Number of Rows', 'apv') }}
+                                    </label>
                                 </th>
                                 <td>
-                                    <input id="numrows" type="number" max="5" min="1" v-model="settings.numrows" />
-                                    <p v-if="('error' in validation.numrows && validation.numrows.error && validation.numrows.message)" class="description error">{{validation.numrows.message}}</p>
-                                    <p class="description">{{__( 'The number of rows to be shown for table.', 'apv' )}}</p>
+                                    <input
+                                        id="numrows"
+                                        v-model="settings.numrows"
+                                        type="number"
+                                        max="5"
+                                        min="1"
+                                    />
+                                    <p
+                                        v-if="('error' in validation.numrows && validation.numrows.error && validation.numrows.message)"
+                                        class="description error"
+                                    >
+                                        {{ validation.numrows.message }}
+                                    </p>
+                                    <p class="description">
+                                        {{ __( 'The number of rows to be shown for table.', 'apv' ) }}
+                                    </p>
                                 </td>
                             </tr>
                             <tr v-if="('humandate' in settings)">
                                 <th scope="row">
-                                    <label>{{__('Human Readable Date', 'apv')}}</label>
+                                    <label>{{ __('Human Readable Date', 'apv') }}</label>
                                 </th>
                                 <td>
-                                    <input id="humandate" type="checkbox" class="switch is-rounded is-info" :checked="settings.humandate" @change="toggleHumanDate" />
-                                    <label for="humandate"></label>
-                                    <p class="description">{{__('Show the date in human readable format.', 'apv')}}</p>
+                                    <input
+                                        id="humandate"
+                                        type="checkbox"
+                                        class="switch is-rounded is-info"
+                                        :checked="settings.humandate"
+                                        @change="toggleHumanDate"
+                                    />
+                                    <label for="humandate" />
+                                    <p class="description">
+                                        {{ __('Show the date in human readable format.', 'apv') }}
+                                    </p>
                                 </td>
                             </tr>
                             <tr v-if="('emails' in settings)">
                                 <th scope="row">
-                                    <label for="emails">{{__( 'Emails', 'apv' )}}</label>
+                                    <label for="emails">
+                                        {{ __( 'Emails', 'apv' ) }}
+                                    </label>
                                 </th>
                                 <td>
-                                    <div v-for="(email, index) in settings.emails" :key="index">
+                                    <div
+                                        v-for="(email, index) in settings.emails"
+                                        :key="index"
+                                    >
                                         <div class="input-group">
-                                            <input type="email" v-model="settings.emails[index]" />
-                                            <span v-if="allowRemovingEmail"
-                                                @click="removeEmailField(index)"
+                                            <input
+                                                v-model="settings.emails[index]"
+                                                type="email"
+                                            />
+                                            <span
+                                                v-if="allowRemovingEmail"
                                                 class="dashicons dashicons-dismiss repeater-control remove"
-                                            ></span>
-                                            <span v-if="allowNewEmail && index === totalEmails -1"
-                                                @click="addEmailField"
+                                                @click="removeEmailField(index)"
+                                            />
+                                            <span
+                                                v-if="allowNewEmail && index === totalEmails -1"
                                                 class="dashicons dashicons-plus-alt repeater-control add"
-                                            ></span>
+                                                @click="addEmailField"
+                                            />
                                         </div>
-                                        <p v-if="(index in validation.emails && validation.emails[index].error && validation.emails[index].message)" class="description error">{{validation.emails[index].message}}</p>
+                                        <p
+                                            v-if="(index in validation.emails && validation.emails[index].error && validation.emails[index].message)"
+                                            class="description error"
+                                        >
+                                            {{ validation.emails[index].message }}
+                                        </p>
                                     </div>
                                 </td>
                             </tr>
                             <tr>
                                 <th>
-                                    <button class="apv-btn apv-btn-submit" type="submit" @click.prevent="submit">
-                                        {{__('Save Settings', 'apv')}}
+                                    <button
+                                        class="apv-btn apv-btn-submit"
+                                        type="submit"
+                                        @click.prevent="submit"
+                                    >
+                                        {{ __('Save Settings', 'apv') }}
                                     </button>
                                 </th>
                             </tr>
                         </template>
                         <template v-else>
-                            <tr class="info-text">{{__('Loading data...', 'apv')}}</tr>
+                            <tr class="info-text">
+                                {{ __('Loading data...', 'apv') }}
+                            </tr>
                         </template>
                     </tbody>
                 </table>
@@ -69,7 +116,7 @@
 import { mapGetters } from 'vuex';
 
 export default {
-    name: 'Settings',
+    name: 'SettingsComponent',
 
     data() {
         return {
@@ -79,16 +126,6 @@ export default {
                 numrows: {},
                 emails: {},
             },
-        }
-    },
-
-    mounted() {
-        this.settings = this.deepCopy(this.settingsData);
-    },
-
-    created() {
-        if (this.totalEmails === 0) {
-            this.addEmailField();
         }
     },
 
@@ -123,6 +160,40 @@ export default {
         }
     },
 
+    watch: {
+        settingsData() {
+            this.settings = this.deepCopy(this.settingsData);
+        },
+
+        emails(newVal) {
+            this.validate('emails');
+            this.settingsChanged.emails = ! this.isEqual(newVal, this.settingsData.emails);
+
+            if (newVal.length === 0) {
+                this.addEmailField();
+            }
+        },
+
+        numrows(newVal) {
+            this.settingsChanged.numrows = parseInt(newVal) !== parseInt(this.settingsData.numrows);
+            this.validate('numrows');
+        },
+
+        humandate(newVal) {
+            this.settingsChanged.humandate = newVal !== this.settingsData.humandate;
+        },
+    },
+
+    mounted() {
+        this.settings = this.deepCopy(this.settingsData);
+    },
+
+    created() {
+        if (this.totalEmails === 0) {
+            this.addEmailField();
+        }
+    },
+
     methods: {
         toggleHumanDate() {
             this.settings.humandate = ! this.settings.humandate;
@@ -145,7 +216,7 @@ export default {
 
             if (this.isEmpty(settingsKey)) {
                 settingsKey = Object.keys(this.settingsChanged);
-            } else if (typeof settingsKey !== 'array') {
+            } else if (typeof settingsKey !== 'object') {
                 settingsKey = [settingsKey];
             }
 
@@ -232,30 +303,6 @@ export default {
             }
         },
     },
-
-    watch: {
-        settingsData() {
-            this.settings = this.deepCopy(this.settingsData);
-        },
-
-        emails(newVal) {
-            this.validate('emails');
-            this.settingsChanged.emails = ! this.isEqual(newVal, this.settingsData.emails);
-
-            if (newVal.length === 0) {
-                this.addEmailField();
-            }
-        },
-
-        numrows(newVal) {
-            this.settingsChanged.numrows = parseInt(newVal) !== parseInt(this.settingsData.numrows);
-            this.validate('numrows');
-        },
-
-        humandate(newVal) {
-            this.settingsChanged.humandate = newVal !== this.settingsData.humandate;
-        },
-    }
 }
 </script>
 

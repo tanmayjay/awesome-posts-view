@@ -31,6 +31,7 @@ const Api = {
 
         data.action = `${Api.data.prefix}${action}`;
 
+        // eslint-disable-next-line no-undef
         return jQuery.ajax({
             url: Api.data.url,
             beforeSend: function ( xhr ) {

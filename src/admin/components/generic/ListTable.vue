@@ -1,11 +1,19 @@
 <template>
     <div class="apv-table">
-        <h1 class="wp-heading-inline apv-heading">{{tableTitle}}</h1>
+        <h1 class="wp-heading-inline apv-heading">
+            {{ tableTitle }}
+        </h1>
+
         <table class="apv-list-table widefat fixed striped table-view-list apv-inside">
             <thead v-if="hasHeaders">
                 <tr>
-                    <th v-for="(header, index) in headers" :key="index" scope="col" class="manage-column">
-                        <strong>{{header}}</strong>
+                    <th
+                        v-for="(header, index) in headers"
+                        :key="index"
+                        scope="col"
+                        class="manage-column"
+                    >
+                        <strong>{{ header }}</strong>
                     </th>
                 </tr>
             </thead>
@@ -13,19 +21,29 @@
                 <template v-if="loading">
                     <tr>
                         <td>
-                            {{loadingText || __( 'Loading data...', 'apv' )}}
+                            {{ loadingText || __( 'Loading data...', 'apv' ) }}
                         </td>
                     </tr>
                 </template>
                 <template v-else-if="hasRowData">
-                    <tr v-for="(row, index) in rows" :key="index">
-                        <td v-for="(data, key) in row" :key="key" :class="key" v-html="data"></td>
+                    <tr
+                        v-for="(row, index) in rows"
+                        :key="index"
+                    >
+                        <!-- eslint-disable-next-line vue/no-v-html -->
+                        <td
+                            v-for="(data, key) in row"
+                            :key="key"
+                            :class="key"
+                            v-html="data"
+                        />
+                        <!--eslint-enable-->
                     </tr>
                 </template>
                 <template v-else>
                     <tr>
                         <td>
-                            {{noDataText || __( 'No data found.', 'apv' )}}
+                            {{ noDataText || __( 'No data found.', 'apv' ) }}
                         </td>
                     </tr>
                 </template>
@@ -38,7 +56,7 @@
 import { mapGetters } from 'vuex';
 
 export default {
-    name: 'ListTable',
+    name: 'ListTableComponent',
 
     props: {
         title: {
@@ -54,8 +72,14 @@ export default {
             required: true,
             default: () => [],
         },
-        noDataText: String,
-        loadingText: String,
+        noDataText: {
+            type: String,
+            default: "",
+        },
+        loadingText: {
+            type: String,
+            default: "",
+        },
     },
 
     computed: {

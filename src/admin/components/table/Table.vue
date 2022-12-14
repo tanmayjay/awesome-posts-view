@@ -5,15 +5,25 @@
             :headers="headers"
             :rows="rows"
         />
-        <div v-if="emails.length" class="apv-settings-emails">
-            <h2>{{__('Emails', 'apv')}}</h2>
+        <div
+            v-if="emails.length"
+            class="apv-settings-emails"
+        >
+            <h2>
+                {{ __('Emails', 'apv') }}
+            </h2>
             <ul>
-                <li class="list-items" v-for="(email, index) in emails" :key="index">
-                    <a :href="'mailto:' + email">{{email}}</a>
+                <li
+                    v-for="(email, index) in emails"
+                    :key="index"
+                    class="list-items"
+                >
+                    <a :href="'mailto:' + email">
+                        {{ email }}
+                    </a>
                 </li>
             </ul>
         </div>
-
     </div>
 </template>
 
@@ -22,7 +32,7 @@ import { mapGetters } from 'vuex';
 import ListTable from '../generic/ListTable.vue';
 
 export default {
-    name: "Table",
+    name: "TableComponent",
 
     components: {
         ListTable,
@@ -31,14 +41,6 @@ export default {
     data() {
         return {
             data: {},
-        }
-    },
-
-    async mounted() {
-        await this.$store.dispatch('base/setData', this.baseData);
-
-        if ( ! this.isEmpty( this.baseData ) ) {
-            this.data = this.deepCopy(this.baseData);
         }
     },
 
@@ -105,7 +107,15 @@ export default {
                 this.data = this.deepCopy(this.baseData);
             }
         }
-    }
+    },
+
+    async mounted() {
+        await this.$store.dispatch('base/setData', this.baseData);
+
+        if ( ! this.isEmpty( this.baseData ) ) {
+            this.data = this.deepCopy(this.baseData);
+        }
+    },
 }
 </script>
 

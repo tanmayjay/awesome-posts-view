@@ -37,7 +37,7 @@ export default {
          *
          * @returns {Boolean}
          */
-        isEmail: email => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,})+$/.test(email),
+        isEmail: email => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/.test(email),
 
         /**
          * Checks if two values are equal.
