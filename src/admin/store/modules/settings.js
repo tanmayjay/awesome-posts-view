@@ -24,6 +24,7 @@ const actions = {
     },
 
     updateData: async({ commit }, payload) => {
+        console.log('payload:', payload);
         store.dispatch('spinner/setSpinner', true);
         return new Promise((resolve, reject) => {
             Api.post('update_settings', payload).done(response => {

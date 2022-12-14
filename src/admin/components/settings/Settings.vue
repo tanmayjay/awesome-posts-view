@@ -140,7 +140,7 @@ export default {
         },
 
         allowNewEmail() {
-            return this.totalEmails < 5 && 'emails' in this.settings && this.settings.emails.every(email => ! this.isEmpty(email));
+            return this.totalEmails < 5 && 'emails' in this.settings && this.settings.emails.every(email => ! this.isEmpty(email) && this.isEmail(email));
         },
 
         allowRemovingEmail() {
@@ -157,7 +157,7 @@ export default {
 
         numrows() {
             return this.settings.numrows;
-        }
+        },
     },
 
     watch: {
@@ -225,14 +225,12 @@ export default {
                     switch(key) {
                         case 'emails':
                             this.settings.emails.map((email, index) => {
-                                if (! this.isEqual(email, this.settingsData.emails[index])) {
+                                if (this.settingsData.emails[index] === undefined || ! this.isEqual(email, this.settingsData.emails[index])) {
                                     if (this.isEmpty(email)) {
                                         this.validation.emails[index] = {
                                             error: false,
                                             message: '',
                                         };
-                                        this.settings.emails.splice(index, 1);
-                                        this.settingsChanged.emails = ! this.isEqual(this.settings.emails, this.settingsData.emails);
                                     } else if (! this.isEmail(email)) {
                                         this.validation.emails[index] = {
                                             error: true,
@@ -278,27 +276,51 @@ export default {
             return validated;
         },
 
+        formSubmittable() {
+            return Object.values(this.settingsChanged).some(value => value);
+        },
+
         async submit() {
-            if (this.validate()) {
-                let newData = {};
-
-                for (let key of Object.keys(this.settingsChanged)) {
-                    if (this.settingsChanged[key]) {
-                        const data = {};
-                        data[key] = this.settings[key];
-
-                        await this.$store.dispatch('settings/updateData', {...data}).then(success => {
-                            this.settingsChanged[key] = false;
-                            newData[key] = data[key];
-                        }, error => {
-                            this.$toast.error(error.data.message);
-                        });
-                    }
+            // Clean the empty emails if exists.
+            this.settings.emails.map((email, index) => {
+                if (this.isEmpty(email)) {
+                    this.settings.emails.splice(index, 1);
                 }
+            });
 
-                if (! this.isEmpty(newData)) {
-                    this.$store.commit('settings/setData', {...this.settingsData, ...newData});
-                    this.$toast.success(this.__('Settings saved successfully.', 'apv'));
+            // Make sure email should be considered to be submitted.
+            this.settingsChanged.emails = ! this.isEqual(this.settings.emails, this.settingsData.emails);
+
+            if (this.validate()) {
+                if (this.formSubmittable()) {
+                    let newData = {};
+
+                    for (let key of Object.keys(this.settingsChanged)) {
+                        if (this.settingsChanged[key]) {
+                            let data = {};
+                            data[key] = this.settings[key];
+
+                            // We cannot send empty array as value in ajax payload.
+                            if ('emails' === key && this.isEmpty(data[key])) {
+                                data[key] = null;
+                            }
+
+                            await this.$store.dispatch('settings/updateData', data).then(success => {
+                                this.settingsChanged[key] = false;
+                                newData[key] = this.settings[key];
+                            }, error => {
+                                this.$toast.error(error.data.message);
+                            });
+                        }
+                    }
+
+                    // Update state with the updated values
+                    if (! this.isEmpty(newData)) {
+                        this.$store.commit('settings/setData', {...this.settingsData, ...newData});
+                        this.$toast.success(this.__('Settings saved successfully.', 'apv'));
+                    }
+                } else {
+                    this.$toast.warning(this.__('No changes have been made yet.', 'apv'));
                 }
             }
         },

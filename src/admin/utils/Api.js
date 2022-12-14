@@ -19,6 +19,7 @@ const Api = {
      */
     ajax: (action, method, data) => {
         let override = null;
+        console.log('data:', data);
 
         if ('PUT' === method || 'DELETE' === method) {
             override = method;
